@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<body>
+Loops, Conditional Statements, Functions, Variables, Parameters, Arrays, Associative Arrays
+
+
+<!--Happy Loop + Array -->
+<p id="HappyLoop"></p>
+
+<script>
+var FamMember = ["Sam", "Bilbo", "Luke", "Rei"];
+var display = "";
+var i;
+for (var i = 0; i < FamMember.length; i++) {
+  display += "* " + FamMember[i] + "<br />";
+}
+document.getElementById("HappyLoop").innerHTML = display;
+</script>
+
+
+<!-- Nasty Loops  + Array -->
+<p id="NastyLoop1"></p><!-- infinant with pop-up -->
+<!--
+<script>
+var FamMember = ["Sam", "Bilbo", "Luke", "Rei"];
+var display = "";
+var i;
+for (var i = 10; i > FamMember.length; i++) {
+  window.alert(FamMember[i]);
+}
+
+</script>
+-->
+<p id="NastyLoop2"></p><!-- Impossible selection -->
+
+<script>
+var FamMember = ["Sam", "Bilbo", "Luke", "Rei"];
+var display = "";
+var i;
+for (var i = 0; i > 3 && i <= 0; i++) {
+  display += "* " + FamMember[i] + "<br />";
+}
+document.getElementById("NastyLoop2").innerHTML = display;
+</script>
+
+
+
+
+
+
+
+
+
+<!-- Happy Conditional Statements -->
+<p id="HappyConStat"></p>
+
+<script>
+var dayN = new Date().getDay();
+if (dayN == 0) {
+  day = "Sunday";
+}
+else if (dayN == 1) {
+  day = "Monday";
+}
+else if (dayN == 2) {
+  day = "Tuesday";
+}
+else if (dayN == 3) {
+  day = "Wednesday";
+}
+else if (dayN == 4) {
+  day = "Thursday";
+}
+else if (dayN == 5) {
+  day = "Friday";
+}
+else if (dayN == 6) {
+  day = "Saturday";
+}
+document.getElementById("HappyConStat").innerHTML = "Today is " + day;
+</script>
+
+
+<!-- Nasty Conditional Statements -->
+<p id="NastyConStat1"></p> <!-- Always displays ture -->
+
+<script>
+var dayN = new Date().getDay();
+if (true) {
+  day = "Sunday";
+}
+else {
+  day = "Monday";
+}
+document.getElementById("NastyConStat1").innerHTML = "Today is " + day;
+</script>
+
+<p id="NastyConStat2"></p>
+
+<script> // Repetative asking dayN == TRUE
+var dayN = true;
+if (dayN == true) {
+  day = "Sunday";
+}
+else {
+  day = "Monday";
+}
+
+document.getElementById("NastyConStat2").innerHTML = "Today is " + day;
+</script>
+
+
+<p id="NastyConStat3"></p>
+
+<script>
+var dayN = new Date().getDay();
+if (dayN == 0) {
+  day = "Sunday";
+}
+else if (dayN == 1) {
+  day = "Monday";
+}
+else if (dayN == 2) {
+  day = "Tuesday";
+}
+else if (dayN == 3) {
+  day = "Wednesday";
+}
+else {
+  day = "Saturday";
+}
+else if (dayN == 4) {
+  day = "Thursday";
+}
+else if (dayN == 5) {
+  day = "Friday";
+}
+
+document.getElementById("NastyConStat3").innerHTML = "Today is " + day;
+</script>
+
+
+
+
+
+
+
+
+<!--Happy Functions + Paramiters  -->
+<p id="HapFunctionA"></p>
+<p id="HapFunctionB"></p>
+
+<script>
+function getTrapizoidArea(base1, base2, height){
+  area = (base1 + base2) / 2 * height;
+  return area;
+}
+var TrapA = getTrapizoidArea(5, 6, 10);
+document.getElementById("HapFunctionA").innerHTML = TrapA;
+
+var TrapB = getTrapizoidArea(10.8, 15.6, 13.14);
+document.getElementById("HapFunctionB").innerHTML = TrapB;
+
+</script>
+
+<!-- Nasty Functions + Paramiters -->
+<!-- Letter submited to function -->
+<p id="NastyFunctionA1"></p>
+<p id="NastyFunctionB1"></p>
+
+<script>
+function getTrapizoidArea(base1, base2, height){
+  area = (base1 + base2) / 2 * height;
+  return area;
+}
+
+var TrapA = getTrapizoidArea(10.8, "A", 13.14);
+document.getElementById("NastyFunctionA1").innerHTML = TrapA;
+
+var TrapB = getTrapizoidArea(5, B, 10);
+document.getElementById("NastyFunctionB1").innerHTML = TrapB;
+
+</script>
+
+<!--Nasty Functions + Paramiters  -->
+<p id="NastyFunctionA2"></p>
+
+<script> // Messed with Paramiters
+function getTrapizoidArea(base1, "2", 10){
+  area = (base1 + base2) / 2 * height;
+  return area;
+}
+var TrapA = getTrapizoidArea(5, 6, 10);
+document.getElementById("NastyFunctionA2").innerHTML = TrapA;
+
+</script>
+
+
+<!-- Happy Variables -->
+<p id="HapVar"></p>
+<script>
+var AsherAge = 20;
+var JTAge = 24;
+var combindedAge = AsherAge + JTAge;
+document.getElementById("HapVar").innerHTML = combindedAge;
+</script>
+
+
+
+<!-- Nasty Variables -->
+<p id="NastyVar1"></p>
+<script> // Changing a variable before it is used when needed for something else.
+var AsherAge = 20;
+var JTAge = 24;
+var AsherAge = "Asher";
+var combindedAge2 = AsherAge + JTAge;
+document.getElementById("NastyVar1").innerHTML = combindedAge2;
+</script>
+
+
+<p id="NastyVar2"></p>
+<script> //Adding true
+var AsherAge = 20;
+var JTAge = true;
+var combindedAge = AsherAge + JTAge;
+document.getElementById("NastyVar2").innerHTML = combindedAge;
+</script>
+
+
+
+
+
+
+
+<!-- Nasty Associative Arrays -->
+<p id="HappyAssocArray"></p>
+<script>
+var personalInfo = {Name: 'Asher', From: 'Utah', Mission: 'Kobe, Japan', Major: 'CIT'}
+document.getElementById("HappyAssocArray").innerHTML = personalInfo['Mission'] + ' - ' + personalInfo['Name'];
+</script>
+
+
+<!-- Nasty Associative Arrays -->
+<p id="NastyAssocArray"></p>
+
+</body>
+</html>
