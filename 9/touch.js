@@ -1,90 +1,87 @@
 function runFunctions(){
-  swipeL();
+  touch();
 }
 
+function touch(){
+  //Set up
+  var canvas = document.getElementById('canvas'),
+      startX, startY,
+      threshold = 150, //required min distance traveled to be considered swipe
+      allowedTime = 200, // maximum time allowed to travel that distance
+      elapsedTime, startTime, response;
 
-function swipeL(){
-
-      var canvas = document.getElementById('canvas'),
-          startX,
-          startY,
-          dist,
-          threshold = 150, //required min distance traveled to be considered swipe
-          allowedTime = 200, // maximum time allowed to travel that distance
-          elapsedTime,
-          startTime,
-          para = document.createElement("p");
-
-      function handleswipeR(isRightSwipe){
-          if (isRightSwipe){
-              console.log("You\'ve made a right swipe!");
-              document.getElementById('log').innerHTML = "You\'ve made a right swipe!";
-              document.getElementById('log').innerHTML = "You\'ve made a right swipe!";
-            }
-            else {
-            }
-      }
-
-      function handleswipeL(isLeftSwipe){
-          if (isLeftSwipe) {
-              console.log("You\'ve made a left swipe!");
-              document.getElementById('log').innerHTML = "You\'ve made a left swipe!";
-          }
-      }
-      function handleswipeU(isUpSwipe){
-          if (isUpSwipe){
-              console.log("You\'ve made a up swipe!");
-              document.getElementById('log').innerHTML = "You\'ve made a up swipe!";
-          }
-      }
-      function handleswipeD(isDownSwipe){
-          if (isDownSwipe) {
-              console.log("You\'ve made a down swipe!");
-              document.getElementById('log').innerHTML = "You\'ve made a down swipe!";
-          }
-      }
-
+//Begins a touch
       canvas.addEventListener('touchstart', function(e){
           canvas.innerHTML = '';
           var touchobj = e.changedTouches[0];
-          dist = 0;
           startX = touchobj.pageX;
           startY = touchobj.pageY;
           startTime = new Date().getTime(); // record time when finger first makes contact with surface
           e.preventDefault();
       }, false);
 
+//tracks the touch
       canvas.addEventListener('touchmove', function(e){
-          e.preventDefault(); // prevent scrolling when inside DIV
+          e.preventDefault(); // prevent scrolling when inside Canvas
       }, false);
 
+//handles the end of a touch
       canvas.addEventListener('touchend', function(e){
           var touchobj = e.changedTouches[0];
-          // get total dist traveled by finger while in contact with surface
-          dist = touchobj.pageX - startX + touchobj.pageY - startY;
-          distForRight = touchobj.pageX - startX; //For right
-          distForLeft = -touchobj.pageX + startX; //For left
-          distForUp = -touchobj.pageY + startY; //For up
-          distForDown = touchobj.pageY - startY; //For down
+          var xChange = touchobj.pageX - startX;
+          var yChange = touchobj.pageY - startY;
           elapsedTime = new Date().getTime() - startTime; // get time elapsed
           // check that elapsed time is within specified, horizontal dist traveled >= threshold, and vertical dist traveled <= 100
           //RIGHT
-          var swipeRightBol = (elapsedTime <= allowedTime && distForRight >= threshold && Math.abs(touchobj.pageY - startY) <= 100); //
-          handleswipeR(swipeRightBol);
+          if(xChange > 0){
+          var swipeRightBol = (elapsedTime <= allowedTime && xChange >= threshold && Math.abs(touchobj.pageY - startY) <= 100);
+          if (swipeRightBol)
+            response = "R";
+        } else if (xChange < 0){
           //LEFT
-          var swipeLeftBol = (elapsedTime <= allowedTime && distForLeft >= threshold && Math.abs(touchobj.pageY - startY) <= 100);
-          handleswipeL(swipeLeftBol);
+          var swipeLeftBol = (elapsedTime <= allowedTime && Math.abs(xChange) >= threshold && Math.abs(touchobj.pageY - startY) <= 100);
+          if (swipeLeftBol)
+            response = "L";
+          }
           //UP
-          var swipeUpBol = (elapsedTime <= allowedTime && distForUp >= threshold && Math.abs(touchobj.pageX - startX) <= 100); //
-          handleswipeU(swipeUpBol);
+          if(yChange < 0){
+          var swipeUpBol = (elapsedTime <= allowedTime && Math.abs(yChange) >= threshold && Math.abs(touchobj.pageX - startX) <= 100); //
+          if (swipeUpBol)
+            response = "U";
+        } else if (yChange > 0) {
           //DOWN
-          var swipeDownBol = (elapsedTime <= allowedTime && distForDown >= threshold && Math.abs(touchobj.pageX - startX) <= 100);
-          handleswipeD(swipeDownBol);
-          e.preventDefault();
+          var swipeDownBol = (elapsedTime <= allowedTime && yChange >= threshold && Math.abs(touchobj.pageX - startX) <= 100);
+          if (swipeDownBol)
+            response = "D";
+          }
+          handleSwipe(response);
+
+          //TAP
+          var timeout;
+          var currentTime = new Date().getTime();
+          var tapLength = currentTime - elapsedTime;
+          clearTimeout(timeout);
+          if(Math.abs(xChange) <= 50 && Math.abs(yChange) <= 50) {
+              timeout = setTimeout(function() {
+                document.getElementById('log').innerHTML = "You just single taped!";
+                  clearTimeout(timeout);
+              }, 200);
+          }
 
       }, false);
 
-
+//Handles a swipe's response
+      function handleSwipe(response){
+        if (response == "R") {
+          document.getElementById('log').innerHTML = "You\'ve made a right swipe!";
+        } else if (response == "L") {
+          document.getElementById('log').innerHTML = "You\'ve made a left swipe!";
+        } else if (response == "U") {
+          document.getElementById('log').innerHTML = "You\'ve made a up swipe!";
+        } else if (response == "D") {
+          document.getElementById('log').innerHTML = "You\'ve made a down swipe!";
+        }
+      }
 
 
       //Pinch and expand
@@ -98,21 +95,5 @@ function swipeL(){
     }
 }, false);
 
-
-//TAP
-var timeout;
-var lastTap = 0;
-canvas.addEventListener('touchend', function(e) {
-    var currentTime = new Date().getTime();
-    var tapLength = currentTime - lastTap;
-    clearTimeout(timeout);
-    if(dist <= 50 && dist >= -50) {
-        timeout = setTimeout(function() {
-          console.log("You just single taped!");
-          document.getElementById('log').innerHTML = "You just single taped!";
-            clearTimeout(timeout);
-        }, 200);
-    }
-    lastTap = currentTime;});
 
 }

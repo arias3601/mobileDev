@@ -1,0 +1,26 @@
+#animation {
+    width: 500px;
+    height: 400px;
+    position: relative;
+    background: green;
+}
+#theAnimation {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background: coral;
+}
+
+#circleT {
+    border-radius: 50%;
+    width: 200px;
+	height: 200px;
+background-color: red;
+}
+
+#circleT:hover {
+	border-radius: 0%;
+background-color: blue;
+     width: 400px;
+     height: 300px;
+}
