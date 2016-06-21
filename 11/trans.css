@@ -1,0 +1,22 @@
+.pad {
+  padding: 10px;
+}
+#darkness {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+#coolness {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  -webkit-clip-path: circle(0% at center);
+  clip-path: circle(0% at center);
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: 2s;
+}
