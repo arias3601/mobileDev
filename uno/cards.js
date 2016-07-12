@@ -11,9 +11,9 @@ function createCards(){
 
   for (var i = 0; i <= 14; i++) {
     if (i === 0 || i === 13 || i === 14) {// creates four 0's, wilds, and draw 4 wilds
-      for (var j = 0.1; j <= 4; j++) {
+      for (var j = 0; j < 4; j++) {
         if (i === 0) {
-          deck[cn++] = new Card(colors[Math.floor(j) % 11], i);
+          deck[cn++] = new Card(colors[j % 4], i);
         } else if (i === 13) {
           deck[cn++] = new Card('wild', 'wild');
         } else{
@@ -25,17 +25,17 @@ function createCards(){
         if (i === 12) {
           deck[cn++] = new Card(colors[k % 4], '+2');
         } else if (i === 11) {
-          deck[cn++] = new Card(colors[Math.floor(k /2) % 4], 'reverse');
+          deck[cn++] = new Card(colors[k % 4], 'reverse');
         } else if (i === 10) {
-          deck[cn++] = new Card(colors[Math.floor(k /2) % 4], 'skip');
+          deck[cn++] = new Card(colors[k % 4], 'skip');
         } else {
-          deck[cn++] = new Card(colors[Math.floor(k /2) % 4], i);
+          deck[cn++] = new Card(colors[k % 4], i);
         }
       }
 
     }
   }
-  deck = shuffle(deck);
+  //deck = shuffle(deck);
   console.log(deck);
 }
 
