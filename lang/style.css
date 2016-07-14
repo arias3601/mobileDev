@@ -1,0 +1,37 @@
+html{
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+body{
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.hidden{
+  display: none;
+}
+#branding{
+  color: green;
+  letter-spacing: 3px;
+  position: relative;
+  bottom: 15px;
+  text-align: center;
+}
+#prompt {
+  font-size: 2em;
+  text-align: center;
+  width: 90%;
+  padding: 5px;
+  height: 4.75em;
+  position: relative;
+  bottom: 50px;
+}
+#nextArrow {
+  position: relative;
+  float: right;
+  vertical-align: bottom;
+  right: 25px;
+  top: 50px;
+}

@@ -1,0 +1,42 @@
+#recordBTN {
+	background-color: red;
+	border: 0px;
+	border-radius: 50%;
+
+	width: 150px;
+	height: 150px;
+
+	position: relative;
+	top: 25px;
+	left: 25px;
+}
+#record {
+	width: 200px;
+	height: 200px;
+	border-style: solid;
+	border-color: red;
+	border-width: 20px;
+	border-radius: 50%;
+	border-top-color: red;
+	border-bottom-color: red;
+/*transparent*/
+	margin: auto;
+}
+
+@keyframes rotate {
+   0% {transform: rotateZ(0deg);}
+	100% {transform: rotateZ(720deg);}
+}
+
+#stopBTN {
+
+}
+
+@keyframes wiggle {
+   0%   {transform: rotate(0deg); }
+   20%   {transform: rotate(10deg); }
+   40%   {transform: rotate(-10deg); }
+   60%   {transform: rotate(10deg); }
+   80%   {transform: rotate(-10deg); }
+   100%   {transform: rotate(0deg); }
+}

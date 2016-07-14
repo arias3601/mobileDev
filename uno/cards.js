@@ -1,10 +1,45 @@
+function run(){
+  var player1;
+  var player2;
+  var deck;
+  if (!localStorage.player1) {
+    player1 = new Player(0);
+    player2 = new Player(0);
+  } else {
+    player1 = JSON.parse(localStorage.player1);
+    player2 = JSON.parse(localStorage.player2);
+  }
+
+
+if (!localStorage.deck) {
+  deck = createCards();
+  deck = shuffle(deck);
+  deal(deck, player1, player2);
+} else {
+  deck = JSON.parse(localStorage.deck);
+}
+  localStorage.player1 = JSON.stringify(player1);
+  localStorage.player2 = JSON.stringify(player2);
+  localStorage.deck = JSON.stringify(deck);
+
+  console.log(deck);
+  console.log(player1.cards);
+  console.log(player2.cards);
+}
+
 function Card(color, number){
     this.color = color;
     this.number = number;
 }
 
+function Player(wins){
+  this.numberOfCards = 0;
+  this.cards = [];
+  this.wins = wins;
+}
+
 function createCards(){
-  var deck = new Array;
+  var deck = [];
   var cn = 0 ; // cn is card number
 
   var colors = ["red", "yellow", "green", "blue"];
@@ -35,8 +70,7 @@ function createCards(){
 
     }
   }
-  //deck = shuffle(deck);
-  console.log(deck);
+  return deck;
 }
 
 function shuffle(cards){
@@ -51,4 +85,17 @@ function shuffle(cards){
     cards[rn2] = temp;
   }
   return cards;
+}
+
+function deal(cards, player1, player2){
+    for (var i = 0; i < 14; i++) {
+      if (i % 2 === 0) {
+        player1.cards[player1.numberOfCards] = cards[i];
+        player1.numberOfCards++;
+      } else {
+        player2.cards[player2.numberOfCards] = cards[i];
+        player2.numberOfCards++;
+      }
+      cards.shift();
+    }
 }
